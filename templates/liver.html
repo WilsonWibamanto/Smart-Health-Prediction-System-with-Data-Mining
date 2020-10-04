@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h2 style="text-align: center;">Liver Disease Prediction</h2>
+<h3>Please Enter the Following Details</h3>
+<br>
+<form method="post" enctype="multipart/form-data" action="predictLiver">
+ {% csrf_token %}
+     <div class="col-md-4">
+         <label for="age">Age:</label>
+         <input name="age" id="age" type="number" min="1" max="99" placeholder="1-99" required value={{liver.age}} >
+         <br>
+         <br>
+         <label>Gender:</label>
+         <label for="male"><input name="gender" id="male" type="radio"  value="0" style="margin-left: 20px;" required>Male</label>
+         <label for="female"><input name="gender" id="female" type="radio"  value="1" style="margin-left: 20px;">Female</label>
+         <br>
+         <br>
+         <label for="totBilirubin">Total Bilirubin (mg/dl):</label>
+         <input name="totBilirubin" id="totBilirubin" type="number" step="0.1" min="0" required value={{liver.totBilirubin}}>
+         <br>
+         <br>
+         <label for="dirBilirubin">Direct Bilirubin (mg/dl):</label>
+         <input name="dirBilirubin" id="dirBilirubin" type="number" step="0.1" min="0"  required value={{liver.dirBilirubin}}>
+         <br>
+         <br>
+         <label for="alkPhos">Alkaline Phosphatase (IU/L):</label>
+         <input name="alkPhos" id="alkPhos" type="number" min="0"  required value={{liver.alkPhos}}>
+         <br>
+         <br>
+         <input type="submit" value="Submit" class="btn btn-primary">
+            {% if result %}
+                <h3>The prediction test is: <br> {{result}}</h3>
+            {% endif %}
+     </div>
+     <div class="col-md-4 col-sm-4">
+         <label for="alanAmino" style="margin-top:3px;">Alanine Aminotransferase (IU/L):</label>
+         <input name="alanAmino" id="alanAmino" type="number" min="0"  required value={{liver.alanAmino}}>
+         <br>
+         <br>
+         <label for="asparAmino">Aspartate Aminotransferase (IU/L):</label>
+         <input name="asparAmino" id="asparAmino" type="number" min="0"  required value={{liver.asparAmino}}>
+         <br>
+         <br>
+         <label for="totProt">Total Proteins (g/dl):</label>
+         <input name="totProt" id="totProt" type="number" step="0.1" min="0" required value={{liver.totProt}}>
+         <br>
+         <br>
+         <label for="albumin">Albumin (g/dl):</label>
+         <input name="albumin" id="albumin" type="number" step="0.1" min="0" required value={{liver.albumin}}>
+         <br>
+         <br>
+         <label for="agratio">Albumin and Globulin Ratio (g/dl):</label>
+         <input name="agratio" id="agratio" type="number" step="0.1" min="0" required value={{liver.agratio}}>
+     </div>
+</form>
+{% endblock %}

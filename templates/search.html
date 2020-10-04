@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content%}
+
+<body style=" text-shadow: 1px 1px 4px #000;">
+<h2 style="text-align: center;">Search Doctors</h2>
+<br>
+<table class="table table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>Image</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Specialism</th>
+        <th>Email</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    {% for user in User %}
+    <tr>
+        <th><img class="img-circle" style=" " src = '{{ user.profile.image.url }}'></th>
+        <th>{{user.first_name}}</th>
+        <th>{{user.last_name}}</th>
+        <th>{{user.username}}</th>
+        <th>{{user.profile.specialism}}</th>
+        <th>{{user.email}}</th>
+        <th>{{user.profile.address}}</th>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+{% endblock %}
+
+
