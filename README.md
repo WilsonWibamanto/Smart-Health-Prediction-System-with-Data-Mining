@@ -9,3 +9,6 @@ My Final Year Project. A system to predict health diseases with the use of Data 
 * CSS (Front-End)
 * Javascript (Front-End)
 * Python (Back-End)
+# Screenshots
+<img src="Liver Prediction Page.PNG">
+<img src="Heart Prediction Page.PNG">
