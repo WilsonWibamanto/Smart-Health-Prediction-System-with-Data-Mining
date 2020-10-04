@@ -1,2 +1,3 @@
 # Smart-Health-Prediction-System-with-Data-Mining
-My Final Year Project (Using software such as Pycharm, Git and Jupyter Notebook; and also programming languages of Python, HTML, CSS and Javascript)
+My Final Year Project. A system to predict health diseases with the use of Data Mining
+# Smart-Health-Prediction-System-with-Data-Mining
