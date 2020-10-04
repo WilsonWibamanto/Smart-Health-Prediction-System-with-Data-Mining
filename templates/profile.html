@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="col-md-3">
+        <img class="img-rounded" style=" " src = '{{ user.profile.image.url }}'>
+        <h3>{{ user.username }}</h3>
+        <p class="text-secondary">Full Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p class="text-secondary">Email: {{ user.email }}</p>
+        <p class="text-secondary">Specialism: {{ user.profile.specialism }}</p>
+        <p class="text-secondary">Address: {{ user.profile.address }}</p>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </div>
+    <div class="form-group col-xs-5">
+        <br>
+        {{u_form|crispy}}
+    </div>
+    <div class="form-group col-xs-5">
+        <br>
+        {{p_form|crispy}}
+    </div>
+ </form>
+
+{% endblock %}

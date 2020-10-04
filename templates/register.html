@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<h2>Registration Page</h2>
+<p><i>*Only administrators/doctors may view and manage the data in the system</i></p>
+<h3>Please Enter the Following Details</h3>
+<br>
+    <form method="POST">
+    {% csrf_token %}
+        <div class="form-group col-xs-8">
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary">Register</button>
+            <br>
+            <br>
+            <p>Already had an account ? <a href="/login/" ><u>Click here to Sign In</u></a></p>
+        </div>
+    </form>
+
+{% endblock %}
+
+
+
+

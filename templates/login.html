@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<h2>Login Page</h2>
+<p><i>*Only administrators/doctors may view and manage the data in the system</i></p>
+<h3>Please Enter the Following Details</h3>
+<br>
+    <form method="POST">
+    {% csrf_token %}
+        <div class="form-group col-xs-8">
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary">Login</button>
+            <br>
+            <br>
+            <p>Forgot Password ? <a href="/password-reset/" ><u>Click here to reset your password</u></a></p>
+            <p>Need an account ? <a href="/registration/" ><u>Click here to Sign Up</u></a></p>
+        </div>
+    </form>
+
+{% endblock %}
+

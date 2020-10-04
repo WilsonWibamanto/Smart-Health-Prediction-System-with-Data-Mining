@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<script>
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+
+    // Create download link element
+    downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+        // Setting the file name
+        downloadLink.download = filename;
+
+        //triggering the function
+        downloadLink.click();
+    }
+}
+</script>
+<body style="text-shadow: 1px 1px 4px #000;">
+<h2 style="text-align: center; text-shadow: 1px 1px 4px #000; ">System Database</h2>
+<h3>Liver Disease</h3>
+<br>
+<ul>
+  <li><u>Age:</u><span style="margin-left: 162px;"></span>Age of the patient [Ranging from 1 to 99]</li>
+  <li><u>Gender:</u><span style="margin-left: 135px;"></span> Gender of the patient [1 = Male, 0 = Female]</li>
+  <li><u>Total Bilirubin:</u><span style="margin-left: 100px;"></span> The Level of Total Bilirubin (Both Direct/Conjugated and Indirect/Unconjugated Bilirubin)</li>
+  <li><u>Direct Bilirubin:</u><span style="margin-left: 93px;"></span> The Level of Direct/Conjugated Bilirubin</li>
+  <li><u>Alkaline Phosphatase:</u><span style="margin-left: 53px;"></span>The Level of Alkaline Phosphatase</li>
+  <li><u>Alanine Aminotransferase:</u><span style="margin-left: 27px;"></span>The Level of Alanine Aminotransferase</li>
+  <li><u>Aspartate Aminotransferase:</u><span style="margin-left: 10px;"></span> The Level of Aspartate Aminotransferase</li>
+  <li><u>Total Proteins:</u><span style="margin-left: 99px;"></span> The Level of Total Proteins</li>
+  <li><u>Albumin:</u><span style="margin-left: 133px;"></span> The Level of Albumin</li>
+  <li><u>Albumin and Globulin Ratio:</u><span style="margin-left: 14px;"></span> The Ratio of Albumin to Globulin</li>
+  <li><u>Result:</u><span style="margin-left: 144px;"></span> Prediction Result [0 = "Unlikely", 1 = "Likely"]</li>
+</ul>
+<br>
+<table id="liver" class="table table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Total Bilirubin</th>
+        <th>Direct Bilirubin</th>
+        <th>Alkaline Phosphatase</th>
+        <th>Alanine Aminotransferase</th>
+        <th>Aspartate Aminotransferase</th>
+        <th>Total Proteins</th>
+        <th>Albumin</th>
+        <th>Albumin and Globulin Ratio</th>
+        <th>Result</th>
+    </tr>
+    </thead>
+    {% for liver in Liver %}
+    <tr>
+        <th>{{liver.age}}</th>
+        <th>{{liver.gender}}</th>
+        <th>{{liver.totBilirubin}}</th>
+        <th>{{liver.dirBilirubin}}</th>
+        <th>{{liver.alkPhos}}</th>
+        <th>{{liver.alanAmino}}</th>
+        <th>{{liver.asparAmino}}</th>
+        <th>{{liver.totProt}}</th>
+        <th>{{liver.albumin}}</th>
+        <th>{{liver.agratio}}</th>
+        <th>{{liver.result}}</th>
+    </tr>
+    {% endfor %}
+</table>
+<button class="btn btn-primary" onclick="exportTableToExcel('liver')">Export as CSV</button>
+<br>
+<br>
+<h3>Heart Disease</h3>
+<br>
+<ul>
+  <li><u>Age:</u><span style="margin-left: 162px;"></span>Age of the patient [Ranging from 1 to 99]</li>
+  <li><u>Gender:</u><span style="margin-left: 135px;"></span> Gender of the patient [1 = Male, 0 = Female]</li>
+  <li><u>Chest Pain Type:</u><span style="margin-left: 80px;"></span> Type of chest pain [1 = Typical Angina, 2 = Atypical Angina, 3 = Non-anginal Pain, 4 = Asymptomatic]<br></li>
+  <li><u>Resting Blood Pressure:</u><span style="margin-left: 35px;"></span> The force of blood flowing against the walls of your arteries (mmHg)</li>
+  <li><u>Cholestrol:</u><span style="margin-left: 122px;"></span>Serum cholestrol levels (mg/dl)</li>
+  <li><u>Fasting Blood Sugar:</u><span style="margin-left: 58px;"></span>The level of fasting blood sugar [0 = Lower than or equal to 120mg/dl,  1 = Higher than 120mg/dl]</li>
+  <li><u>Resting Electrocardiographic:</u><span style="margin-left: 2px;"></span> The results of resting electrocardiographic [0 = Normal, 1 = ST-T Wave Abnormality, 2 = Left Ventricular Hypertrophy]</li>
+  <li><u>Maximum Heart Rate:</u><span style="margin-left: 49px;"></span> The maximum heart rate achieved</li>
+  <li><u>Exercise-induced Angina:</u><span style="margin-left: 26px;"></span> The information whether heart disease may related to angina which is usually triggered by physical activity/exercises [0 = No, 1 = Yes]</li>
+  <li><u>Old Peak:</u><span style="margin-left: 123px;"></span> ST depression induced by exercise relative to rest</li>
+  <li><u>Slope:</u><span style="margin-left: 145px;"></span> Slope of the peak exercise ST segment [0 = Upsloping, 1 = Flat, 2 = Downsloping]</li>
+  <li><u>Number of Major Vessels:</u><span style="margin-left: 25px;"></span> Number of major vessels colored by flourosopy [0-3]</li>
+  <li><u>Thallium:</u><span style="margin-left: 129px;"></span> The results of thallium heart scan [0 = Normal, 1 = Fixed Defect, 2 = Reversible Defect]</li>
+  <li><u>Result:</u><span style="margin-left: 143px;"></span> Prediction Result [0 = "Unlikely", 1 = "Likely"]</li>
+</ul>
+<br>
+<table id="heart" class="table table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Chest Pain Type</th>
+        <th>Resting Blood Pressure</th>
+        <th>Cholestrol</th>
+        <th>Fasting Blood Sugar</th>
+        <th>Resting Electrocardiographic</th>
+        <th>Maximum Heart Rate</th>
+        <th>Exercise-induced Angina</th>
+        <th>Old Peak</th>
+        <th>Slope</th>
+        <th>Number of Major Vessels</th>
+        <th>Thallium</th>
+        <th>Result</th>
+    </tr>
+    </thead>
+    {% for heart in Heart %}
+    <tr>
+        <th>{{heart.age}}</th>
+        <th>{{heart.gender}}</th>
+        <th>{{heart.cp}}</th>
+        <th>{{heart.trestbps}}</th>
+        <th>{{heart.chol}}</th>
+        <th>{{heart.fbs}}</th>
+        <th>{{heart.restecg}}</th>
+        <th>{{heart.thalach}}</th>
+        <th>{{heart.exang}}</th>
+        <th>{{heart.oldpeak}}</th>
+        <th>{{heart.slope}}</th>
+        <th>{{heart.ca}}</th>
+        <th>{{heart.thal}}</th>
+        <th>{{heart.result}}</th>
+    </tr>
+    {% endfor %}
+</table>
+<button class="btn btn-primary" onclick="exportTableToExcel('heart')">Export as CSV</button>
+</body>
+{% endblock %}
+
+

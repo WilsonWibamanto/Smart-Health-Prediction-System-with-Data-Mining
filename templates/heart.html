@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <h2 style="text-align: center;">Heart Disease Prediction</h2>
+    <h3>Please Enter the Following Details</h3>
+    <br>
+    <form method="post" enctype="multipart/form-data" action="predictHeart">
+    {% csrf_token %}
+         <div class="col-md-4">
+             <label for="age">Age:</label>
+             <input name="age" id="age" type="number" min="1" max="99" placeholder="1-99" required value={{heart.age}}>
+             <br>
+             <br>
+             <label for="trestbps">Resting Blood Pressure (mmHg):</label>
+             <input name="trestbps" id="trestbps" type="number" min="0" required value={{heart.trestbps}}>
+             <br>
+             <br>
+             <label for="chol">Cholestrol Level (in mg/dl):</label>
+             <input name="chol" id="chol" type="number" min="0" required value={{heart.chol}}>
+             <br>
+             <br>
+             <label for="thalach">Maximum Heart Rate:</label>
+             <input name="thalach" id="thalach"  type="number" min="0" required value={{heart.thalach}}>
+             <br>
+             <br>
+             <label for="oldpeak">Old Peak:</label>
+             <input name="oldpeak" id="oldpeak" type="number" step="0.1" min="0" required value={{heart.oldpeak}}>
+             <br>
+             <br>
+             <input type="submit" value="Submit" class="btn btn-primary">
+             <br>
+             <br>
+             {% if result %}
+            <h3>The prediction test is: <br> {{result}}</h3>
+            {% endif %}
+         </div>
+         <div class="col-md-4 col-sm-4">
+             <label style="margin-top: 3px;">Gender:</label>
+             <label for="male"><input name="gender" id="male" type="radio"  value="0" style="margin-left: 20px;" required>Male</label>
+             <label for="female"><input name="gender" id="female" type="radio"  value="1" style="margin-left: 20px;">Female</label>
+             <br>
+             <br>
+             <label>Fasting Blood Sugar:</label>
+             <label for="lower"><input name="fbs" id="lower" type="radio"  value="0" style="margin-left: 20px;" required>Lower than or equal to 120mg/dl</label>
+             <label for="higher"><input name="fbs" id="higher" type="radio"  value="1" style="margin-left: 20px;">Higher than 120mg/dl</label>
+             <br>
+             <br>
+             <label style="margin-top: 3px;">Chest Type Pain:</label>
+             <label for="typicalAngina"><input name="cp" id="typicalAngina" type="radio"  value="1" style="margin-left: 20px;" required>Typical Angina</label>
+             <label for="atypicalAngina"><input name="cp" id="atypicalAngina" type="radio"  value="2" style="margin-left: 20px;">Atypical Angina</label>
+             <label for="nonanginalPain"><input name="cp" id="nonanginalPain" type="radio"  value="3" style="margin-left: 20px;">Non-anginal Pain</label>
+             <label for="asymptomatic"><input name="cp" id="asymptomatic" type="radio"  value="4" style="margin-left: 20px;">Asymptomatic</label>
+             <br>
+             <br>
+             <label>Number of major vessels (0–3) colored by fluoroscopy:</label>
+             <label for="0"><input name="ca" id="0" type="radio"  value="0" style="margin-left: 20px;" required>0</label>
+             <label for="1"><input name="ca" id="1" type="radio"  value="1" style="margin-left: 20px;">1</label>
+             <label for="2"><input name="ca" id="2" type="radio"  value="2" style="margin-left: 20px;">2</label>
+             <label for="3"><input name="ca" id="3" type="radio"  value="3" style="margin-left: 20px;">3</label>
+         </div>
+         <div class="col-md-4 col-sm-4">
+             <label style="margin-top: 3px;">Resting Electrocardiographic:</label>
+             <label for="normal"><input name="restecg" id="normal" type="radio"  value="0" style="margin-left: 20px;" required>Normal</label>
+             <label for="STT"><input name="restecg" id="STT" type="radio"  value="1" style="margin-left: 20px;">ST-T wave abnormality</label>
+             <label for="LVH"><input name="restecg" id="LVH" type="radio"  value="2" style="margin-left: 20px;" >Left Ventricular Hypertrophy</label>
+             <br>
+             <br>
+             <label>Exercise-induced Angina:</label>
+             <label for="No"><input name="exang" id="No" type="radio"  value="0" style="margin-left: 20px;" required>No</label>
+             <label for="Yes"><input name="exang" id="Yes" type="radio"  value="1" style="margin-left: 20px;">Yes</label>
+             <br>
+             <br>
+             <label>Slope of the peak exercise ST segment:</label>
+             <label for="up"><input name="slope" id="up" type="radio"  value="0" style="margin-left: 20px;" required>Upsloping</label>
+             <label for="flat"><input name=slope id="flat" type="radio"  value="1" style="margin-left: 20px;">Flat</label>
+             <label for="down"><input name="slope" id="down" type="radio"  value="2" style="margin-left: 20px;" >Downsloping</label>
+             <br>
+             <br>
+             <label>Thallium:</label>
+             <label for="norm"><input name="thal" id="norm" type="radio"  value="1" style="margin-left: 20px;" required>Normal</label>
+             <label for="fixed"><input name="thal" id="fixed" type="radio"  value="2" style="margin-left: 20px;">Fixed defect</label>
+             <label for="reversible"><input name="thal" id="reversible" type="radio"  value="3" style="margin-left: 20px;">Reversible defect</label>
+         </div>
+
+    </form>
+    <br>
+
+
+
+{% endblock %}
