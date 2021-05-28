@@ -9,8 +9,8 @@ import pandas as pd
 import MySQLdb
 import joblib
 
-loaded_model=joblib.load(r'F:\A.P.U\Final Year Project\Data Mining\LiverDisease.pkl')
-loaded_model2=joblib.load(r'F:\A.P.U\Final Year Project\Data Mining\HeartDisease.pkl')
+loaded_model=joblib.load(r'models\LiverDisease.pkl')
+loaded_model2=joblib.load(r'models\HeartDisease.pkl')
 
 db = MySQLdb.connect(host="localhost",
                      user="admin",
